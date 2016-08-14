@@ -1,4 +1,4 @@
-package com.lesson1.hometask1;
+package com.lesson1.hometask;
 
 public class Square {
 

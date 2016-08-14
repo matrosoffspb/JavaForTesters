@@ -1,3 +1,3 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = "com.lesson1.hometask1.MyFirstTest"
+mainClassName = "com.lesson1.hometask.MyFirstTest"
