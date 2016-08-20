@@ -1,3 +1,12 @@
 apply plugin: 'java'
 apply plugin: 'application'
-mainClassName = "com.lesson1.hometask.MyFirstTest"
+mainClassName = "com.lesson.hometask.MyFirstTest"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.testng:testng:6.9.10'
+}
