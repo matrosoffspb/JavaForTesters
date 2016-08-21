@@ -10,15 +10,7 @@ public class ContactDeletionTests extends TestBase{
 
         selectContact();
         deleteContact();
-        returnHomePage();
+        closeAlertWindow();
     }
 
-    private void deleteContact() {
-
-        wd.findElement(By.xpath(".//*[@value='Delete']")).click();
-    }
-
-    private void selectContact() {
-        wd.findElement(By.xpath(".//*[@class=\"center\"][1]")).click();
-    }
 }

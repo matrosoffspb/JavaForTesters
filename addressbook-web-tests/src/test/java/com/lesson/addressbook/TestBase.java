@@ -120,4 +120,17 @@ public class TestBase {
     protected void goToAddNewContact() {
         wd.findElement(By.linkText("add new")).click();
     }
+
+    protected void closeAlertWindow() {
+        wd.switchTo().alert().accept();
+    }
+
+    protected void deleteContact() {
+
+        wd.findElement(By.xpath(".//*[@value='Delete']")).click();
+    }
+
+    protected void selectContact() {
+        wd.findElement(By.xpath(".//*[@class=\"center\"][1]")).click();
+    }
 }
