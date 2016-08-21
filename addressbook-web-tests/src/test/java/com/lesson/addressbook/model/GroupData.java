@@ -1,4 +1,4 @@
-package com.lesson.addressbook;
+package com.lesson.addressbook.model;
 
 public class GroupData {
     private final String name;
