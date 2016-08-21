@@ -1,7 +1,4 @@
 apply plugin: 'java'
-apply plugin: 'application'
-mainClassName = "com.lesson.hometask.MyFirstTest"
-
 
 repositories {
     mavenCentral()
@@ -9,4 +6,5 @@ repositories {
 
 dependencies {
     compile 'org.testng:testng:6.9.10'
-   }
+    compile 'org.seleniumhq.selenium:selenium-java:2.53.1'
+}
