@@ -1,6 +1,7 @@
 package com.lesson.addressbook.appmanager;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class HelperBase {
@@ -22,5 +23,14 @@ public class HelperBase {
 
     public void acceptAlert() {
         wd.switchTo().alert().accept();
+    }
+
+    public boolean isAlertPresent() {
+        try {
+            wd.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
     }
 }
