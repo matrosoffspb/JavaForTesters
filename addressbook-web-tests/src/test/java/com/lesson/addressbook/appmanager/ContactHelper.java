@@ -42,4 +42,12 @@ public class ContactHelper extends HelperBase {
     public void selectContact() {
         click(By.xpath(".//*[@class=\"center\"][1]"));
     }
+
+    public void editContact() {
+        click(By.xpath(".//*[@href=\"edit.php?id=22\"]"));
+    }
+
+    public void updateContact() {
+        click(By.xpath("//div[@id='content']/form[1]/input[22]"));
+    }
 }
