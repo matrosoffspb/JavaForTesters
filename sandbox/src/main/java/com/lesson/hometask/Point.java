@@ -1,4 +1,4 @@
-package com.lesson1.hometask;
+package com.lesson.hometask;
 
 public class Point {
 
