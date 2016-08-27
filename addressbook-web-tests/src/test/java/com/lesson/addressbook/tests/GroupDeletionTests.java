@@ -1,16 +1,12 @@
 package com.lesson.addressbook.tests;
 
-import com.lesson.addressbook.model.GroupData;
 import org.testng.annotations.Test;
 
 public class GroupDeletionTests extends TestBase {
 
     @Test
     public void testGroupDeletion() {
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
-        }
+        checkCreationGroup();
         app.getGroupHelper().selectGroup();
         app.getGroupHelper().deleteGroup();
         app.getGroupHelper().returnGroupPage();

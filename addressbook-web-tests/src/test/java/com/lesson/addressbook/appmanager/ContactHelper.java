@@ -51,11 +51,30 @@ public class ContactHelper extends HelperBase {
         click(By.xpath(".//*[@name=\"entry\"][1]//*[@class=\"center\"][1]"));
     }
 
+    public void goToHomePage() {
+        click(By.xpath(".//*[@href=\"./\"]"));
+    }
+
+    public void returnToHomePage(){
+        click(By.linkText("home page"));
+    }
+
     public void editContact() {
         click(By.xpath(".//*[@name=\"entry\"][1]//*[@title=\"Edit\"]"));
     }
 
     public void updateContact() {
         click(By.xpath(".//*[@value='Update'][2]"));
+    }
+
+    public void createContact(ContactData contact) {
+        goToAddNewContact();
+        fillContactForm(contact, true);
+        submitCreationContact();
+        returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }
