@@ -20,7 +20,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
+    public void fillForm (ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("middlename"), contactData.getMiddlename());
         type(By.name("lastname"), contactData.getLastname());
@@ -46,47 +46,49 @@ public class ContactHelper extends HelperBase {
         acceptAlert();
     }
 
-    public void deleteContact() {
+    public void delete () {
 
         click(By.xpath(".//*[@value='Delete']"));
     }
 
-    public void selectContact(int index) {
+    public void select(int index) {
         wd.findElements(By.name("selected[]")).get(index).click();
            }
 
-    public void goToHomePage() {
+    public void returnToHomePage() {
         click(By.xpath(".//*[@href=\"./\"]"));
     }
-
-    public void returnToHomePage(){
-        click(By.linkText("home page"));
-    }
-
-    public void editContact(int index) {
+    public void edit(int index) {
         wd.findElements(By.xpath(".//*[@title=\"Edit\"]")).get(index).click();
             }
 
-    public void updateContact() {
+    public void update() {
         click(By.xpath(".//*[@value='Update'][2]"));
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         goToAddNewContact();
-        fillContactForm(contact, true);
+        fillForm(contact, true);
         submitCreationContact();
+        returnToHomePage();
+        }
+
+    public void delete(int index) {
+        select(index);
+        delete();
+        closeAlertWindow();
         returnToHomePage();
     }
 
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
+//    public boolean isThere() {
+//        return isElementPresent(By.name("selected[]"));
+//    }
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.xpath(".//*[@name = \"entry\"]"));
         for (WebElement element : elements) {
