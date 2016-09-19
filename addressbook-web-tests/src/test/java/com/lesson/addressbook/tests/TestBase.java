@@ -22,10 +22,6 @@ public class TestBase {
         app.stop();
     }
 
-    protected void checkCreationGroup() {
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()){
-            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
-        }
+
     }
-}
+

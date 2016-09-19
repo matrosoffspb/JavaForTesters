@@ -3,6 +3,7 @@ package com.lesson.addressbook.tests;
 import com.lesson.addressbook.model.ContactData;
 import com.lesson.addressbook.model.GroupData;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Comparator;
@@ -11,10 +12,18 @@ import java.util.List;
 
 public class ContactCreationTests extends TestBase {
 
+    @BeforeMethod
+    public void checkCreationGroup() {
+        app.getNavigationHelper().gotoGroupPage();
+        if (!app.getGroupHelper().isThereAGroup()) {
+            app.getGroupHelper().createGroup(new GroupData("test1", null, null));
+        }
+    }
+
     @Test
     public void ContactCreationTests() {
+        app.getContactHelper().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
-        checkCreationGroup();
         ContactData contact = new ContactData ("Bob", "Marly", "Dilan", "bobby77", "Job", "Anything address", "999-00-00", "bobby77@pro.com", "facebook.com", "test1");
         app.getContactHelper().createContact(contact);
         List<ContactData> after = app.getContactHelper().getContactList();
@@ -27,8 +36,8 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void ContactCreationTests2() {
+        app.getContactHelper().goToHomePage();
         List<ContactData> before = app.getContactHelper().getContactList();
-        checkCreationGroup();
         ContactData contact = new ContactData("Rob", "Grey", "Stark", "robby88", "Hunt", "In deep forest", "777-00-00", "robert@pro.com", "myspace.com", "test1");
         app.getContactHelper().createContact(contact);
         List<ContactData> after = app.getContactHelper().getContactList();
