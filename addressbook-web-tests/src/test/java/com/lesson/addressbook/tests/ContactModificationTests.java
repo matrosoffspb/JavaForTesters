@@ -22,12 +22,18 @@ public class ContactModificationTests extends TestBase {
     @Test
     public void testContactModification() {
         if (app.contact().list().size() == 0) {
-            app.contact().create(new ContactData("Bob", "Marly", "Dilan", "bobby77", "Job", "Anything address", "999-00-00", "bobby77@pro.com", "facebook.com", "test1"));
+            app.contact().create(new ContactData()
+                    .withFirstname("Bob").withMiddlename("Marly").withLastname("Dilan").withNickname("bobby77")
+                    .withComapany("Job").withAddress("Anything address").withHomephone("999-00-00")
+                    .withEmail("bobby77@pro.com").withHomepage("facebook.com").withGroup("test1"));
         }
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
         app.contact().edit(index);
-        ContactData contact = new ContactData(before.get(index).getId(), "Bob1", "Marly1", "Dilan1", "bobby77", "Job", "Anything address", "999-00-00", "bobby77@pro.com", "facebook.com", null);
+        ContactData contact = new ContactData()
+                .withId(before.get(index).getId()).withFirstname("Bob1").withMiddlename("Marly1").withLastname("Dilan")
+                .withNickname("bobby717").withComapany("Job1").withAddress("Anything address1").withHomephone("999-00-001")
+                .withEmail("bobby77@pro1.com").withHomepage("facebook1.com").withGroup(null);
         app.contact().fillForm((contact), false);
         app.contact().update();
         app.goTo().homePage();

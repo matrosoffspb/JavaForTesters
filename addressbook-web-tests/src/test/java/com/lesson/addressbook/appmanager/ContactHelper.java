@@ -80,10 +80,6 @@ public class ContactHelper extends HelperBase {
         returnToHomePage();
     }
 
-//    public boolean isThere() {
-//        return isElementPresent(By.name("selected[]"));
-//    }
-
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
@@ -95,7 +91,7 @@ public class ContactHelper extends HelperBase {
             String firstname = element.findElements(By.tagName("td")).get(2).getText();
             String lastname = element.findElements(By.tagName("td")).get(1).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, firstname, null, lastname, null, null, null, null, null, null, null);
+            ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
             contacts.add(contact);
         }
     return contacts;

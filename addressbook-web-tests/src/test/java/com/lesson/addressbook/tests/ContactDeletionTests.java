@@ -22,7 +22,10 @@ public class ContactDeletionTests extends TestBase {
     @Test
     public void ContactDeletionTests() {
         if (app.contact().list().size() == 0) {
-            app.contact().create(new ContactData("Bob", "Marly", "Dilan", "bobby77", "Job", "Anything address", "999-00-00", "bobby77@pro.com", "facebook.com", "test1"));
+            app.contact().create(new ContactData()
+                    .withFirstname("Bob").withMiddlename("Marly").withLastname("Dilan").withNickname("bobby77")
+                    .withComapany("Job").withAddress("Anything address").withHomephone("999-00-00")
+                    .withEmail("bobby77@pro.com").withHomepage("facebook.com").withGroup("test1"));
         }
         List<ContactData> before = app.contact().list();
         int index = before.size() - 1;
