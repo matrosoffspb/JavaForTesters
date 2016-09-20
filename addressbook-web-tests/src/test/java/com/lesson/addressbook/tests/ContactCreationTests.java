@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
@@ -23,17 +24,17 @@ public class ContactCreationTests extends TestBase {
 
     @Test
     public void ContactCreationTests() {
-        List<ContactData> before = app.contact().list();
+        Set<ContactData> before = app.contact().all();
         ContactData contact = new ContactData()
                 .withFirstname("Bob").withMiddlename("Marly").withLastname("Dilan").withNickname("bobby77")
                 .withComapany("Job").withAddress("Anything address").withHomephone("999-00-00")
                 .withEmail("bobby77@pro.com").withHomepage("facebook.com").withGroup("test1");
         app.contact().create(contact);
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1, "Check list contacts");
 
-        contact.withId(after.stream().max((o1, o2) -> Integer.compare(o1.getId(), o2.getId())).get().getId());
+        contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt());
         before.add(contact);
-        Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+        Assert.assertEquals(before, after);
     }
 }
