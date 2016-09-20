@@ -15,7 +15,7 @@ public class ContactCreationTests extends TestBase {
     @BeforeMethod
     public void checkCreationGroup() {
         app.goTo().groupPage();
-        if (app.group().list().size() == 0) {
+        if (app.group().all().size() == 0) {
             app.group().create(new GroupData().withName("test1"));
         }
         app.goTo().homePage();
@@ -36,22 +36,4 @@ public class ContactCreationTests extends TestBase {
         before.add(contact);
         Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
     }
-
-    @Test
-    public void ContactCreationTests2() {
-        List<ContactData> before = app.contact().list();
-        ContactData contact = new ContactData()
-                .withFirstname("Rob").withMiddlename("Grey").withLastname("Stark").withNickname("robby88")
-                .withComapany("Hunt").withAddress("In deep forest").withHomephone("777-00-00")
-                .withEmail("robert@pro.com").withHomepage("myspace.com").withGroup("test1");
-        app.contact().create(contact);
-        List<ContactData> after = app.contact().list();
-        Assert.assertEquals(after.size(), before.size() + 1, "Check list contacts");
-
-        before.add(contact);
-        Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
-            }
 }
