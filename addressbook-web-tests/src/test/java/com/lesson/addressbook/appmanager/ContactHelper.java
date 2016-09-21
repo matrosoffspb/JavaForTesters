@@ -1,6 +1,7 @@
 package com.lesson.addressbook.appmanager;
 
 import com.lesson.addressbook.model.ContactData;
+import com.lesson.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -85,13 +86,6 @@ public class ContactHelper extends HelperBase {
         returnToHomePage();
         }
 
-    public void delete(int index) {
-        select(index);
-        delete();
-        closeAlertWindow();
-        returnToHomePage();
-    }
-
     public void delete(ContactData contact) {
         selectId(contact.getId());
         delete();
@@ -104,8 +98,8 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public Set<ContactData> all() {
-        Set<ContactData> contacts = new HashSet<ContactData>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.xpath(".//*[@name = \"entry\"]"));
         for (WebElement element : elements) {
             String firstname = element.findElements(By.tagName("td")).get(2).getText();
