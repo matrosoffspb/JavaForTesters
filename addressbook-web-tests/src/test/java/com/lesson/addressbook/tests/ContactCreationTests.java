@@ -30,8 +30,8 @@ public class ContactCreationTests extends TestBase {
                 .withComapany("Job").withAddress("Anything address").withHomephone("999-00-00")
                 .withEmail("bobby77@pro.com").withHomepage("facebook.com").withGroup("test1");
         app.contact().create(contact);
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
-        assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after, equalTo
                 (before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
     }
