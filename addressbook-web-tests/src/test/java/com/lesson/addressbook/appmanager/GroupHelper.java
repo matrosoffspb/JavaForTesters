@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.security.acl.Group;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -54,6 +55,7 @@ public class GroupHelper extends HelperBase {
         initGroupCreation();
         fillGroupForm(group);
         submitGroupCreation();
+        groupCashe = null;
         returnGroupPage();
     }
 
@@ -62,12 +64,14 @@ public class GroupHelper extends HelperBase {
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
+        groupCashe = null;
         returnGroupPage();
     }
 
     public void delete(GroupData group) {
         selectId(group.getId());
         delete();
+        groupCashe = null;
         returnGroupPage();
     }
 
@@ -79,17 +83,22 @@ public class GroupHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    private Groups groupCashe = null;
+
     public Groups all () {
-        Groups groups = new Groups();
+        if (groupCashe != null){
+            return new Groups(groupCashe);
+        }
+        groupCashe = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             GroupData group = new GroupData().withId(id).withName(name);
-            groups.add(group);
+            groupCashe.add(group);
         }
 
-        return groups;
+        return new Groups(groupCashe);
     }
 
 
