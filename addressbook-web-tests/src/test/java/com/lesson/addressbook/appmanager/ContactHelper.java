@@ -136,4 +136,11 @@ public class ContactHelper extends HelperBase {
         return new ContactData().withId(contact.getId()).withFirstname(firstname)
                 .withLastname(lastname).withHomephone(home).withEmail(email).withAddress(address);
     }
+
+    public ContactData infoFromDetailsForm(ContactData contact) {
+        wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", contact.getId()))).click();
+        String details = wd.findElement(By.id("content")).getText();
+        wd.navigate().back();
+        return new ContactData().withDetails(details);
+    }
 }
